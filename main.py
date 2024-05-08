@@ -1,6 +1,10 @@
 import PyPDF2
 import os
+<<<<<<< HEAD
 import uuid
+=======
+#done
+>>>>>>> 3aa88b323148bf7e218da5112eacae9be2d96e95
 
 from config import SOURCE_DIR, RESULT_DIR
 
