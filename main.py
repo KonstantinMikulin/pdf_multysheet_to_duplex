@@ -1,23 +1,19 @@
 import PyPDF2
 import os
-<<<<<<< HEAD
-import uuid
-=======
-#done
->>>>>>> 3aa88b323148bf7e218da5112eacae9be2d96e95
+from datetime import datetime
 
-from config import SOURCE_DIR, RESULT_DIR
+from config import INPUT_DIR, RESULT_DIR
 
 
-def split_pdf(input_folder, output_folder):
+def split_pdf(input_dir, output_dir):
     if not os.path.exists(RESULT_DIR):
         os.makedirs(RESULT_DIR)
 
-    for file_name in os.listdir(SOURCE_DIR):
+    for file_name in os.listdir(input_dir):
         # Check if the file is an .pdf
         if file_name.endswith('.pdf'):
             # Construct the full path to the PDF file
-            input_file = os.path.join(SOURCE_DIR, file_name)
+            input_file = os.path.join(input_dir, file_name)
 
             with open(input_file, 'rb') as file:
                 pdf_reader = PyPDF2.PdfReader(file)
@@ -30,13 +26,13 @@ def split_pdf(input_folder, output_folder):
                     pdf_writer = PyPDF2.PdfWriter()
                     pdf_writer.add_page(pdf_reader.pages[i])
                     pdf_writer.add_page(pdf_reader.pages[i + 1])
-                    id = uuid.uuid4()
+                    time_stamp = str(datetime.now()).replace(':', '')
 
-                    output_file = os.path.join(output_folder, f"result_{id}.pdf")
+                    output_file = os.path.join(output_dir, f"result_{time_stamp}.pdf")
 
                     with open(output_file, 'wb') as output:
                         pdf_writer.write(output)
 
 
 if __name__ == "__main__":
-    split_pdf(SOURCE_DIR, RESULT_DIR)
+    split_pdf(INPUT_DIR, RESULT_DIR)
