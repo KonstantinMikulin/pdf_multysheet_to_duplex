@@ -1,5 +1,6 @@
 import PyPDF2
 import os
+import uuid
 
 from config import SOURCE_DIR, RESULT_DIR
 
@@ -25,8 +26,9 @@ def split_pdf(input_folder, output_folder):
                     pdf_writer = PyPDF2.PdfWriter()
                     pdf_writer.add_page(pdf_reader.pages[i])
                     pdf_writer.add_page(pdf_reader.pages[i + 1])
+                    id = uuid.uuid4()
 
-                    output_file = os.path.join(output_folder, f"result_{i//2 + 1}.pdf")
+                    output_file = os.path.join(output_folder, f"result_{id}.pdf")
 
                     with open(output_file, 'wb') as output:
                         pdf_writer.write(output)
