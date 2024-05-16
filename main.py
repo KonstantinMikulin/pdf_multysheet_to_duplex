@@ -28,7 +28,7 @@ def split_pdf(input_dir, output_dir):
                     pdf_writer.add_page(pdf_reader.pages[i + 1])
                     time_stamp = str(datetime.now()).replace(':', '')
 
-                    output_file = os.path.join(output_dir, f"result_{time_stamp}.pdf")
+                    output_file = os.path.join(output_dir, f"result {time_stamp}.pdf")
 
                     with open(output_file, 'wb') as output:
                         pdf_writer.write(output)
